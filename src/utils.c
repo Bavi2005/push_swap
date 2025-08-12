@@ -140,3 +140,18 @@ int	ft_abs(int n)
 		return (-n);
 	return (n);
 }
+
+int	get_position(t_stack *stack, int value)
+{
+	int	position;
+
+	position = 0;
+	while (stack)
+	{
+		if (stack->value == value)
+			return (position);
+		position++;
+		stack = stack->next;
+	}
+	return (-1);
+}
