@@ -107,6 +107,12 @@ int	parse_single_arg(char *arg, t_stack **a)
 		i++;
 	}
 	ft_free_split(split);
+	if (has_duplicates(*a))
+	{
+		free_stack(a);
+		return (0);
+	}
+	assign_indices(*a);
 	return (1);
 }
 
@@ -123,6 +129,12 @@ int	parse_multiple_args(int argc, char **argv, t_stack **a)
 		add_node_back(a, new_node(num));
 		i++;
 	}
+	if (has_duplicates(*a))
+	{
+		free_stack(a);
+		return (0);
+	}
+	assign_indices(*a);
 	return (1);
 }
 

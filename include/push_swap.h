@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpichyal <bpichyal@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/20 14:23:25 by bpichyal          #+#    #+#             */
+/*   Updated: 2025/08/25 16:12:37 by bpichyal         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 #define PUSH_SWAP_H
 
@@ -10,9 +22,9 @@
 
 typedef struct s_stack
 {
-    int value;
-    int index;
-    struct s_stack *next;
+	int value;
+	int index;
+	struct s_stack *next;
 } t_stack;
 
 int parse_input(int argc, char **argv, t_stack **a);
@@ -53,6 +65,8 @@ void rrr(t_stack **a, t_stack **b);
 
 // Utility functions
 int get_min(t_stack *stack);
+int get_max(t_stack *stack);
 int get_position(t_stack *stack, int value);
+void assign_indices(t_stack *stack);
 
 #endif

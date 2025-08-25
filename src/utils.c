@@ -141,6 +141,18 @@ int	ft_abs(int n)
 	return (n);
 }
 
+void	assign_indices(t_stack *stack)
+{
+	int	index;
+
+	index = 0;
+	while (stack)
+	{
+		stack->index = index++;
+		stack = stack->next;
+	}
+}
+
 int	get_position(t_stack *stack, int value)
 {
 	int	position;

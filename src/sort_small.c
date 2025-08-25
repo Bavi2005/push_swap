@@ -50,9 +50,14 @@ void	sort_three(t_stack **a)
 void	sort_four(t_stack **a, t_stack **b)
 {
 	int	min_pos;
+	int min_val = get_min(*a);
 
-	min_pos = get_position(*a, get_min(*a));
-	if (min_pos == 1)
+	min_pos = get_position(*a, min_val);
+	if (min_pos == 0)
+	{
+		// Already at top, no rotation needed
+	}
+	else if (min_pos == 1)
 		ra(a);
 	else if (min_pos == 2)
 	{
@@ -69,9 +74,14 @@ void	sort_four(t_stack **a, t_stack **b)
 void	sort_five(t_stack **a, t_stack **b)
 {
 	int	min_pos;
+	int min_val = get_min(*a);
 
-	min_pos = get_position(*a, get_min(*a));
-	if (min_pos == 1)
+	min_pos = get_position(*a, min_val);
+	if (min_pos == 0)
+	{
+		// Already at top, no rotation needed
+	}
+	else if (min_pos == 1)
 		ra(a);
 	else if (min_pos == 2)
 	{
