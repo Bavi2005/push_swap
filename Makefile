@@ -4,39 +4,40 @@
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: bpichyal <bpichyal@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   #+#+            #
-#    Created: 2025/08/04 13:47:58 by bpichyal          #+#    #+#              #
-#    Updated: 2025/08/05 16:10:00 by bpichyal         ###   ########.fr        #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/09/07 16:30:00 by bpichyal         #+#    #+#              #
+#    Updated: 2025/10/24 22:00:00 by bpichyal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
-SRC = src/push_swap.c \
-	  src/utils.c \
-	  src/stack_ops.c \
-	  src/parse_input.c \
-	  src/sort_small.c \
-	  src/sort_large.c
+NAME    := push_swap
+BONUS   := bonus/checker
+CC      := cc
+CFLAGS  := -Wall -Wextra -Werror -g
+HDR     := includes/push_swap.h
 
-OBJ = $(SRC:.c=.o)
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I./include -I./include/libft -I./include/printf
+SRCS := src/main.c $(wildcard src/*/*.c)
+BSRCS   := $(wildcard bonus/*.c)
+OBJS    := $(SRCS:.c=.o)
+BOBJS   := $(BSRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) -L./include/libft -lft -L./include/printf -lftprintf
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -I $(HDR) -o $@ $^
 
-$(OBJ): %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+bonus: $(BONUS)
+
+$(BONUS): $(BOBJS) $(filter-out src/main.o,$(OBJS))
+	@mkdir -p bonus
+	$(CC) $(CFLAGS) -I $(HDR) -o $@ $^
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJS) $(BOBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
