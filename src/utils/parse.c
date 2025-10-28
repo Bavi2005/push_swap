@@ -6,7 +6,7 @@
 /*   By: bpichyal <bpichyal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 18:12:05 by bpichyal          #+#    #+#             */
-/*   Updated: 2025/10/24 17:08:07 by bpichyal         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:05:22 by bpichyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	parse_args(int argc, char **argv, t_stack *a)
 	if (!process_args(a, argv, 1, argc))
 	{
 		free(a->arr);
+		a->arr = NULL;
 		return (0);
 	}
 	return (1);

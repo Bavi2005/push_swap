@@ -6,7 +6,7 @@
 /*   By: bpichyal <bpichyal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 17:20:00 by bpichyal          #+#    #+#             */
-/*   Updated: 2025/10/24 17:08:20 by bpichyal         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:05:39 by bpichyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	is_sorted(t_stack *a)
 {
 	int	i;
 
+	if (a->size <= 1)
+		return (1);
 	i = 0;
 	while (i < a->size - 1)
 	{

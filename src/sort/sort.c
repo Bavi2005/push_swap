@@ -6,13 +6,12 @@
 /*   By: bpichyal <bpichyal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 17:21:51 by bpichyal          #+#    #+#             */
-/*   Updated: 2025/10/24 17:07:29 by bpichyal         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:04:41 by bpichyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-// ACTUAL DEFINITION — This was missing!
 static void	perform_rotation(t_stack *s, char id, int direction)
 {
 	if (direction == 1)

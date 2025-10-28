@@ -4,87 +4,108 @@
 /*   checker_ops.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpichyal <bpichyal@student.42.fr>          +#+  +:+       +#+        */
-/*                                                    +#+#+#+#+#+   +#+       */
-/*   Created: 2025/10/24 18:00:00 by bpichyal         #+#    #+#             */
-/*   Updated: 2025/10/24 18:00:00 by bpichyal         ###   ########.fr       */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/28 14:59:43 by bpichyal          #+#    #+#             */
+/*   Updated: 2025/10/28 15:10:41 by bpichyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static void	silent_sa(t_stack *a)
+static void	sa_silent(t_stack *a)
 {
 	int	tmp;
 
-	if (a->size < 2)
+	if (!a || a->size < 2)
 		return ;
 	tmp = a->arr[0];
 	a->arr[0] = a->arr[1];
 	a->arr[1] = tmp;
 }
 
-static void	silent_pb(t_stack *a, t_stack *b)
+static void	pb_silent(t_stack *a, t_stack *b)
 {
 	int	i;
 
-	if (!a->size)
+	if (!a || !b || a->size == 0)
 		return ;
-	i = b->size++;
-	while (--i >= 0)
-		b->arr[i + 1] = b->arr[i];
+	i = b->size;
+	while (i > 0)
+	{
+		b->arr[i] = b->arr[i - 1];
+		i--;
+	}
 	b->arr[0] = a->arr[0];
-	i = -1;
-	while (++i < --a->size)
+	b->size++;
+	i = 0;
+	while (i < a->size - 1)
+	{
 		a->arr[i] = a->arr[i + 1];
+		i++;
+	}
+	a->size--;
 }
 
-static void	silent_ra(t_stack *a)
+static void	ra_silent(t_stack *a)
 {
 	int	tmp;
 	int	i;
 
-	if (a->size < 2)
+	if (!a || a->size < 2)
 		return ;
 	tmp = a->arr[0];
-	i = -1;
-	while (++i < a->size - 1)
+	i = 0;
+	while (i < a->size - 1)
+	{
 		a->arr[i] = a->arr[i + 1];
+		i++;
+	}
 	a->arr[a->size - 1] = tmp;
 }
 
-void	exec_op(t_stack *a, t_stack *b, char *ln)
+static int	exec_rotate_ops(t_stack *a, t_stack *b, char *line)
 {
-	if (!ft_strcmp(ln, "sa"))
-		silent_sa(a);
-	else if (!ft_strcmp(ln, "sb"))
-		silent_sa(b);
-	else if (!ft_strcmp(ln, "ss"))
+	if (!ft_strcmp(line, "ra"))
+		ra_silent(a);
+	else if (!ft_strcmp(line, "rb"))
+		ra_silent(b);
+	else if (!ft_strcmp(line, "rr"))
 	{
-		silent_sa(a);
-		silent_sa(b);
+		ra_silent(a);
+		ra_silent(b);
 	}
-	else if (!ft_strcmp(ln, "pa"))
-		silent_pb(b, a);
-	else if (!ft_strcmp(ln, "pb"))
-		silent_pb(a, b);
-	else if (!ft_strcmp(ln, "ra"))
-		silent_ra(a);
-	else if (!ft_strcmp(ln, "rb"))
-		silent_ra(b);
-	else if (!ft_strcmp(ln, "rr"))
+	else if (!ft_strcmp(line, "rra"))
+		rra_silent(a);
+	else if (!ft_strcmp(line, "rrb"))
+		rra_silent(b);
+	else if (!ft_strcmp(line, "rrr"))
 	{
-		silent_ra(a);
-		silent_ra(b);
-	}
-	else if (!ft_strcmp(ln, "rra"))
-		silent_rra(a);
-	else if (!ft_strcmp(ln, "rrb"))
-		silent_rra(b);
-	else if (!ft_strcmp(ln, "rrr"))
-	{
-		silent_rra(a);
-		silent_rra(b);
+		rra_silent(a);
+		rra_silent(b);
 	}
 	else
-		exit_error();
+		return (0);
+	return (1);
+}
+
+int	exec_op(t_stack *a, t_stack *b, char *line)
+{
+	if (!line || *line == '\0')
+		return (1);
+	if (!ft_strcmp(line, "sa"))
+		sa_silent(a);
+	else if (!ft_strcmp(line, "sb"))
+		sa_silent(b);
+	else if (!ft_strcmp(line, "ss"))
+	{
+		sa_silent(a);
+		sa_silent(b);
+	}
+	else if (!ft_strcmp(line, "pa"))
+		pb_silent(b, a);
+	else if (!ft_strcmp(line, "pb"))
+		pb_silent(a, b);
+	else if (!exec_rotate_ops(a, b, line))
+		return (0);
+	return (1);
 }

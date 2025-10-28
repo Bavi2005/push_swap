@@ -6,7 +6,7 @@
 /*   By: bpichyal <bpichyal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 18:06:41 by bpichyal          #+#    #+#             */
-/*   Updated: 2025/10/24 17:08:31 by bpichyal         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:05:46 by bpichyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,14 @@ int	main(int argc, char **argv)
 		exit_error();
 	b.size = 0;
 	b.capacity = a.capacity;
+	if (a.size <= 1 || is_sorted(&a))
+	{
+		free_stack(&a);
+		free(b.arr);
+		return (0);
+	}
 	normalize_stack(&a);
 	sort_stack(&a, &b);
 	free_stack(&a);
 	free_stack(&b);
-	return (0);
 }
