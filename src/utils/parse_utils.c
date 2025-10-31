@@ -6,12 +6,11 @@
 /*   By: bpichyal <bpichyal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 15:49:55 by bpichyal          #+#    #+#             */
-/*   Updated: 2025/10/28 15:05:13 by bpichyal         ###   ########.fr       */
+/*   Updated: 2025/10/31 16:08:19 by bpichyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-#include <limits.h>
 
 int	ft_atoi(const char *str, int *error)
 {
@@ -32,7 +31,7 @@ int	ft_atoi(const char *str, int *error)
 			return (0);
 		}
 		res = res * 10 + (*str++ - '0');
-		if (res * sign > INT_MAX || res * sign < INT_MIN)
+		if (!check_overflow(res, sign))
 		{
 			*error = 1;
 			return (0);
@@ -72,18 +71,19 @@ int	parse_digits(char *str, int sign, long *res)
 int	process_args(t_stack *a, char **argv, int start, int end)
 {
 	int	i;
-	int	val;
+	int	current_num;
 
+	current_num = 0;
 	i = start;
 	while (i < end)
 	{
 		if (!argv[i] || !is_valid_number(argv[i]))
 			return (0);
-		if (!safe_atoi(argv[i], &val))
+		if (!safe_atoi(argv[i], &current_num))
 			return (0);
-		if (is_duplicate(a, val, a->size))
+		if (is_duplicate(a, current_num, a->size))
 			return (0);
-		a->arr[a->size] = val;
+		a->arr[a->size] = current_num;
 		a->size++;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: bpichyal <bpichyal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 14:51:06 by bpichyal          #+#    #+#             */
-/*   Updated: 2025/10/28 15:05:08 by bpichyal         ###   ########.fr       */
+/*   Updated: 2025/10/31 17:14:10 by bpichyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ int	safe_atoi(char *str, int *out)
 
 	res = 0;
 	sign = 1;
+	if (!*str)
+		return (0);
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
 			sign = -1;
 		str++;
 	}
-	if (!*str)
-		return (0);
 	if (!parse_digits(str, sign, &res))
 		return (0);
 	if (res == 0 && *str == '0')

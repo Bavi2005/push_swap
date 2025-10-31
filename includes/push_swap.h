@@ -6,7 +6,7 @@
 /*   By: bpichyal <bpichyal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 17:20:00 by bpichyal          #+#    #+#             */
-/*   Updated: 2025/10/28 15:03:17 by bpichyal         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:12:34 by bpichyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ size_t	ft_strlen(const char *s);
 
 // bonus checker utils
 int		ft_strcmp(const char *s1, const char *s2);
-void	silent_rra(t_stack *a);
 void	rra_silent(t_stack *a);
 
 // just for checking bonus files

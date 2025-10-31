@@ -11,10 +11,10 @@
 # **************************************************************************** #
 
 NAME    := push_swap
-BONUS   := bonus/checker
+BONUS   := checker
 CC      := cc
 CFLAGS  := -Wall -Wextra -Werror -g
-HDR     := includes/push_swap.h
+HEADER  := includes/push_swap.h
 
 SRCS := src/main.c $(wildcard src/*/*.c)
 BSRCS   := $(wildcard bonus/*.c)
@@ -24,13 +24,12 @@ BOBJS   := $(BSRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -I $(HDR) -o $@ $^
+	$(CC) $(CFLAGS) -I $(HEADER) -o $@ $^
 
 bonus: $(BONUS)
 
 $(BONUS): $(BOBJS) $(filter-out src/main.o,$(OBJS))
-	@mkdir -p bonus
-	$(CC) $(CFLAGS) -I $(HDR) -o $@ $^
+	$(CC) $(CFLAGS) -I $(HEADER) -o $@ $^
 
 clean:
 	rm -f $(OBJS) $(BOBJS)
